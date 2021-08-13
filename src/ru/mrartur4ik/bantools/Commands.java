@@ -156,7 +156,7 @@ public class Commands implements CommandExecutor {
 					boolean nicknameHasIP = false;
 					for(String ban : bans){
 						try {
-							String nick = bansConfig.getString("ip-bans." + ban + ".nickname");
+							String nick = bansConfig.getString("ip-bans." + ban + ".from");
 							if(nick.equalsIgnoreCase(ip)){
 								ip = ban;
 								nicknameHasIP = true;
