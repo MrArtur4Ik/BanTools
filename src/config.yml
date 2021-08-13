@@ -1,0 +1,13 @@
+messages:
+  ban-message: "&e➤ %banPlayer%&e был забанен %player%"
+  kick-message: "&eВы были забанены %player%"
+  join-kick-message: "&eВы были забанены"
+  already-ban-message: "&cЭтот игрок уже забанен!"
+  noban-message: "&cЭтот игрок не забанен!"
+  unban-message: "&e➤ %banPlayer%&e был разбанен %player%"
+  reason: "&eпо причине: "
+  ban-ip-message: "&e➤ %banPlayer%&e был забанен %player%&e по IP"
+  ip-kick-message: "&eВы были забанены %player% по IP"
+  ip-join-kick-message: "&eВы были забанены по IP"
+  noplayer-message: "&cЭтот игрок не в сети!"
+  unban-ip-noplayer-message: "&cЭтого игрока нет в базе!"
