@@ -9,9 +9,6 @@ commands:
     aliases:
       - bt
       - bans
-  ban:
-    permission: bantools.ban
-    usage: /ban <player>
   ban-ip:
     permission: bantools.banip
     usage: /ban-ip <player/ip>
