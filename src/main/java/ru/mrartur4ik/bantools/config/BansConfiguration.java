@@ -71,7 +71,7 @@ public class BansConfiguration extends SimpleConfiguration {
     }
 
     public void banIP(@NotNull String address, Ban ban) {
-        set("ipbans." + address, ban);
+        set("ip-bans." + address, ban);
     }
 
     public void unban(@NotNull UUID uuid) {
@@ -79,7 +79,7 @@ public class BansConfiguration extends SimpleConfiguration {
     }
 
     public void unbanIP(@NotNull String address) {
-        set("ipbans." + address, null);
+        set("ip-bans." + address, null);
     }
 
     public Map<UUID, Ban> getBans() {
