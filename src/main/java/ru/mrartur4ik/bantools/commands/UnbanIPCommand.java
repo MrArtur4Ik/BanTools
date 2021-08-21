@@ -28,7 +28,7 @@ public class UnbanIPCommand extends Command {
 
     public UnbanIPCommand() {
         super("unban-ip", "Разбанить ip игрока", "/ban-ip <никнейм/ip> [причина]", Collections.emptyList());
-        setPermission("bantools.ban-ip");
+        setPermission("bantools.unban-ip");
     }
 
     @Override

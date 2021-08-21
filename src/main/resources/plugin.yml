@@ -2,19 +2,3 @@ name: BanTools
 main: ru.mrartur4ik.bantools.BanTools
 version: 1.0
 api-version: 1.13
-
-commands:
-  bantools:
-    permission: bantools.menu
-    aliases:
-      - bt
-      - bans
-  ban-ip:
-    permission: bantools.banip
-    usage: /ban-ip <player/ip>
-  unban:
-    permission: bantools.unban
-    usage: /unban <player>
-  unban-ip:
-    permission: bantools.unban-ip
-    usage: /unban <player>

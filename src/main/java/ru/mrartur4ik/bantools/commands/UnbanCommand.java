@@ -24,6 +24,7 @@ public class UnbanCommand extends Command {
 
     public UnbanCommand() {
         super("unban", "Разбанить игрока", "/unban <никнейм>", Collections.singletonList("pardon"));
+        setPermission("bantools.unban");
     }
 
     @Override
