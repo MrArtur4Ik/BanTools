@@ -50,6 +50,8 @@ public class BanTools extends JavaPlugin implements Listener, Runnable {
         cmdList.add(new ReloadBansCommand());
         cmdList.add(new UnbanCommand());
         cmdList.add(new UnbanIPCommand());
+        cmdList.add(new TempBanCommand());
+        cmdList.add(new TempBanIPCommand());
 
         commandMap.registerAll(getName(), cmdList);
 

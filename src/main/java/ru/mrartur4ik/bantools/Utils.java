@@ -4,6 +4,9 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.joda.time.Period;
+import org.joda.time.format.PeriodFormatter;
+import org.joda.time.format.PeriodFormatterBuilder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,5 +31,18 @@ public class Utils {
             }
         }
         return null;
+    }
+
+    public static long parseTime(String input) throws IllegalArgumentException {
+        PeriodFormatter formatter = new PeriodFormatterBuilder()
+                .appendYears().appendSuffix("Y")
+                .appendDays().appendSuffix("D")
+                .appendHours().appendSuffix("h")
+                .appendMinutes().appendSuffix("m")
+                .appendSeconds().appendSuffix("s")
+                .toFormatter();
+
+        Period p = formatter.parsePeriod(input);
+        return p.toStandardDuration().getMillis();
     }
 }

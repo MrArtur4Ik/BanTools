@@ -49,7 +49,7 @@ public class UnbanIPCommand extends Command {
 
                     Bukkit.broadcast(plugin.unbanMessage(ip, ban));
                 } else {
-                    sender.sendMessage(config.getColorizedString("info.no-ip"));
+                    sender.sendMessage(config.getColorizedString("info.incorrect-ip"));
                 }
             } else {
                 sender.sendMessage(config.getColorizedString("info.player-has-not-banned"));
