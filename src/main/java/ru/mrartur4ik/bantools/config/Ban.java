@@ -31,7 +31,7 @@ public class Ban implements ConfigurationSerializable {
         } else {
             this.from = Bukkit.getOfflinePlayer(from).getUniqueId();
         }
-        this.time = ((Number) args.get("time")).longValue();
+        this.time = (Long) args.get("time");
     }
 
     public Ban(String reason, UUID from, long time) {

@@ -1,21 +1,21 @@
 package ru.mrartur4ik.bantools.commands;
 
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.OfflinePlayer;
-import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.bukkit.event.player.PlayerKickEvent;
 import org.jetbrains.annotations.NotNull;
 import ru.mrartur4ik.bantools.BanTools;
 import ru.mrartur4ik.bantools.config.Ban;
 import ru.mrartur4ik.bantools.config.BansConfiguration;
 import ru.mrartur4ik.bantools.config.Configuration;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.UUID;
 
-public class UnbanCommand extends Command {
+public class UnbanCommand extends SimpleCommand {
 
     private static final BanTools plugin = BanTools.getInstance();
 
@@ -23,12 +23,11 @@ public class UnbanCommand extends Command {
     private final Configuration config = plugin.getConfig();
 
     public UnbanCommand() {
-        super("unban", "Разбанить игрока", "/unban <никнейм>", Collections.singletonList("pardon"));
-        setPermission("bantools.unban");
+        super("unban", "Разбанить игрока", "/unban <никнейм>", Collections.singletonList("pardon"), "bantools.unban");
     }
 
     @Override
-    public boolean execute(@NotNull CommandSender sender, @NotNull String commandLabel, @NotNull String[] args) {
+    public boolean exec(@NotNull CommandSender sender, @NotNull String commandLabel, @NotNull String[] args) {
         if(args.length > 0) {
             String nickname = args[0];
             OfflinePlayer target = Bukkit.getOfflinePlayerIfCached(nickname);
@@ -57,7 +56,7 @@ public class UnbanCommand extends Command {
     }
 
     @Override
-    public @NotNull List<String> tabComplete(@NotNull CommandSender sender, @NotNull String alias, @NotNull String[] args) throws IllegalArgumentException {
+    public @NotNull List<String> complete(@NotNull CommandSender sender, @NotNull String alias, @NotNull String[] args) throws IllegalArgumentException {
         if(args.length == 1) {
             List<String> list = new ArrayList<>();
             for(@NotNull OfflinePlayer p : Bukkit.getOfflinePlayers()) {

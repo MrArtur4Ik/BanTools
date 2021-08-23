@@ -3,7 +3,6 @@ package ru.mrartur4ik.bantools.commands;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.OfflinePlayer;
-import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerKickEvent;
@@ -20,20 +19,19 @@ import java.util.List;
 import java.util.UUID;
 import java.util.regex.Pattern;
 
-public class TempBanIPCommand extends Command {
+public class TempBanIPCommand extends SimpleCommand {
 
     private static final BanTools plugin = BanTools.getInstance();
     private final BansConfiguration bansConfig = plugin.getBansConfig();
     private final Configuration config = plugin.getConfig();
 
     public TempBanIPCommand() {
-        super("tempban-ip", "Забанить игрока по IP временно", "/tempban-ip <никнейм/ip> <время> [причина]", Collections.emptyList());
-        setPermission("bantools.tempban-ip");
+        super("tempban-ip", "Забанить игрока по IP временно", "/tempban-ip <никнейм/ip> <время> [причина]", "bantools.tempban-ip");
     }
 
     @Override
-    public boolean execute(@NotNull CommandSender sender, @NotNull String commandLabel, String[] args) {
-        if(args.length > 0) {
+    public boolean exec(@NotNull CommandSender sender, @NotNull String commandLabel, String[] args) {
+        if(args.length > 1) {
             String ip = args[0];
             if(!bansConfig.getIPBans().containsKey(ip)) {
                 String reason = "";
@@ -75,7 +73,7 @@ public class TempBanIPCommand extends Command {
 
                     for(String s : bansConfig.getIPs(target.getUniqueId())) {
                         if(bansConfig.getIPBans().containsKey(s)) {
-                            sender.sendMessage(config.getColorizedString("info.already-in-ban"));
+                            sender.sendMessage(config.getColorizedString("info.player-already-in-ban"));
                             break;
                         }
                         bansConfig.banIP(s, ban);
@@ -96,7 +94,7 @@ public class TempBanIPCommand extends Command {
     }
 
     @Override
-    public @NotNull List<String> tabComplete(@NotNull CommandSender sender, @NotNull String alias, @NotNull String[] args) throws IllegalArgumentException {
+    public @NotNull List<String> complete(@NotNull CommandSender sender, @NotNull String alias, @NotNull String[] args) throws IllegalArgumentException {
         if(args.length == 1) {
             List<String> list = new ArrayList<>();
             for(@NotNull OfflinePlayer p : Bukkit.getOfflinePlayers()) {

@@ -1,15 +1,10 @@
 package ru.mrartur4ik.bantools.commands;
 
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
-import org.bukkit.OfflinePlayer;
-import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.bukkit.event.player.PlayerKickEvent;
 import org.jetbrains.annotations.NotNull;
 import ru.mrartur4ik.bantools.BanTools;
-import ru.mrartur4ik.bantools.Utils;
 import ru.mrartur4ik.bantools.config.Ban;
 import ru.mrartur4ik.bantools.config.BansConfiguration;
 import ru.mrartur4ik.bantools.config.Configuration;
@@ -20,19 +15,18 @@ import java.util.List;
 import java.util.UUID;
 import java.util.regex.Pattern;
 
-public class UnbanIPCommand extends Command {
+public class UnbanIPCommand extends SimpleCommand {
 
     private static final BanTools plugin = BanTools.getInstance();
     private final BansConfiguration bansConfig = plugin.getBansConfig();
     private final Configuration config = plugin.getConfig();
 
     public UnbanIPCommand() {
-        super("unban-ip", "Разбанить ip игрока", "/ban-ip <никнейм/ip> [причина]", Collections.emptyList());
-        setPermission("bantools.unban-ip");
+        super("unban-ip", "Разбанить ip игрока", "/ban-ip <никнейм/ip> [причина]", "bantools.unban-ip");
     }
 
     @Override
-    public boolean execute(@NotNull CommandSender sender, @NotNull String commandLabel, String[] args) {
+    public boolean exec(@NotNull CommandSender sender, @NotNull String commandLabel, String[] args) {
         if(args.length > 0) {
             String ip = args[0].replace('.', '-');
             if(bansConfig.getIPBans().containsKey(ip)) {
@@ -60,7 +54,7 @@ public class UnbanIPCommand extends Command {
     }
 
     @Override
-    public @NotNull List<String> tabComplete(@NotNull CommandSender sender, @NotNull String alias, @NotNull String[] args) throws IllegalArgumentException {
+    public @NotNull List<String> complete(@NotNull CommandSender sender, @NotNull String alias, @NotNull String[] args) throws IllegalArgumentException {
         if(args.length == 1) {
             List<String> list = new ArrayList<>();
             for(String s : bansConfig.getIPBans().keySet()) {

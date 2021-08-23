@@ -14,6 +14,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerLoginEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
+import org.joda.time.DateTimeUtils;
 import ru.mrartur4ik.bantools.commands.*;
 import ru.mrartur4ik.bantools.config.Ban;
 import ru.mrartur4ik.bantools.config.BansConfiguration;
@@ -173,7 +174,7 @@ public class BanTools extends JavaPlugin implements Listener, Runnable {
             }
         }
 
-        return Component.text(config.getColorizedString("broadcast.ban-message").replace("%unbanned%", Objects.requireNonNull(unbannedname)).replace("%player%", name));
+        return Component.text(config.getColorizedString("broadcast.unban-message").replace("%unbanned%", Objects.requireNonNull(unbannedname)).replace("%player%", name));
     }
 
     public Component unbanMessage(String address, Ban ban) {
@@ -231,7 +232,7 @@ public class BanTools extends JavaPlugin implements Listener, Runnable {
     public void run() {
         Map<UUID, Ban> bans = bansConfig.getBans();
         for(Ban ban : bans.values()) {
-            if(ban.getTime() >= System.currentTimeMillis()) {
+            if(ban.getTime() <= System.currentTimeMillis()) {
                 bansConfig.set("bans." + Utils.getByValue(bans, ban), null);
                 bansConfig.saveConfig();
             }
@@ -239,7 +240,7 @@ public class BanTools extends JavaPlugin implements Listener, Runnable {
 
         Map<String, Ban> ipbans = bansConfig.getIPBans();
         for(Ban ban : ipbans.values()) {
-            if(ban.getTime() >= System.currentTimeMillis()) {
+            if(ban.getTime() <= System.currentTimeMillis()) {
                 bansConfig.set("ipbans." + Utils.getByValue(ipbans, ban), null);
                 bansConfig.saveConfig();
             }

@@ -3,7 +3,6 @@ package ru.mrartur4ik.bantools.commands;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.OfflinePlayer;
-import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerKickEvent;
@@ -18,7 +17,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 
-public class BanCommand extends Command {
+public class BanCommand extends SimpleCommand {
 
     private static final BanTools plugin = BanTools.getInstance();
 
@@ -26,12 +25,11 @@ public class BanCommand extends Command {
     private final Configuration config = plugin.getConfig();
 
     public BanCommand() {
-        super("ban", "Забанить игрока навсегда", "/ban <никнейм> [причина]", Collections.emptyList());
-        setPermission("bantools.ban");
+        super("ban", "Забанить игрока навсегда", "/ban <никнейм> [причина]", "bantools.ban");
     }
 
     @Override
-    public boolean execute(@NotNull CommandSender sender, @NotNull String commandLabel, String[] args) {
+    public boolean exec(@NotNull CommandSender sender, @NotNull String commandLabel, String[] args) {
         if(args.length > 0) {
             String nickname = args[0];
             OfflinePlayer target = Bukkit.getOfflinePlayerIfCached(nickname);
@@ -62,7 +60,7 @@ public class BanCommand extends Command {
                     ((Player) target).kick(plugin.kickMessage(ban, false), PlayerKickEvent.Cause.BANNED);
                 }
             } else {
-                sender.sendMessage(config.getColorizedString("info.already-in-ban"));
+                sender.sendMessage(config.getColorizedString("info.player-already-in-ban"));
             }
             return true;
         }
@@ -70,7 +68,7 @@ public class BanCommand extends Command {
     }
 
     @Override
-    public @NotNull List<String> tabComplete(@NotNull CommandSender sender, @NotNull String alias, @NotNull String[] args) throws IllegalArgumentException {
+    public @NotNull List<String> complete(@NotNull CommandSender sender, @NotNull String alias, @NotNull String[] args) throws IllegalArgumentException {
         if(args.length == 1) {
             List<String> list = new ArrayList<>();
             for(@NotNull OfflinePlayer p : Bukkit.getOfflinePlayers()) {
