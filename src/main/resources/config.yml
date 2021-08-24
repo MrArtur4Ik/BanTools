@@ -1,0 +1,18 @@
+version: 1
+broadcast:
+  ban-message: "&e➤ &r%banned%&e был забанен &r%player%&e"
+  unban-message: "&e➤ &r%unbanned%&e был разбанен &r%player%"
+  ban-ip-message: "&e➤ &r%banned%&e был забанен &r%player%&e по IP"
+  reason: " по причине: &r%reason%"
+  expire: " бан истечёт &f%date%"
+kick:
+  kick-message: "&eВы были забанены &f%player%"
+  ip-kick-message: "&eВы были забанены &f%player%&e по IP"
+  reason: "&eПо причине: &f%reason%"
+  expire: "&eБан истечёт: &f%date%"
+info:
+  player-already-in-ban: "&cЭтот игрок уже забанен!"
+  player-has-not-banned: "&cЭтот игрок не имеет бана!"
+  player-has-not-played-before: "&cЭтого игрока не было на сервере!"
+  incorrect-ip: "&cВведите правильный IP-адрес."
+  incorrect-time: "&cВведите правильное время по формату 1Y1M1D1h1m1s."
