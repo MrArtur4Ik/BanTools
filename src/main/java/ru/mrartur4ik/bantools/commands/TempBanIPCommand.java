@@ -81,7 +81,15 @@ public class TempBanIPCommand extends SimpleCommand {
                     }
 
                     if(target.isOnline()) {
-                        ((Player) target).kick(plugin.kickMessage(ban, true), PlayerKickEvent.Cause.BANNED);
+                        Player p = (Player) target;
+                        String address = p.getAddress().getAddress().getHostAddress().replace('.', '-');
+                        if(!bansConfig.getIPBans().containsKey(address)){
+                            bansConfig.banIP(address, ban);
+
+                            Bukkit.broadcast(plugin.broadcastMessage(address, ban));
+                        }
+
+                        p.kick(plugin.kickMessage(ban, true), PlayerKickEvent.Cause.BANNED);
                     }
                 }
                 bansConfig.saveConfig();

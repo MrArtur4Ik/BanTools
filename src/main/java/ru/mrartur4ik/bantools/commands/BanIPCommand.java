@@ -64,17 +64,28 @@ public class BanIPCommand extends SimpleCommand {
                         return true;
                     }
 
-                    for(String s : bansConfig.getIPs(target.getUniqueId())) {
+                    List<String> ips = bansConfig.getIPs(target.getUniqueId());
+
+                    for(String s : ips) {
                         if(bansConfig.getIPBans().containsKey(s)) {
                             sender.sendMessage(config.getColorizedString("info.player-already-in-ban"));
                             break;
                         }
                         bansConfig.banIP(s, ban);
+
                         Bukkit.broadcast(plugin.broadcastMessage(s, ban));
                     }
 
                     if(target.isOnline()) {
-                        ((Player) target).kick(plugin.kickMessage(ban, true), PlayerKickEvent.Cause.BANNED);
+                        Player p = (Player) target;
+                        String address = p.getAddress().getAddress().getHostAddress().replace('.', '-');
+                        if(!bansConfig.getIPBans().containsKey(address)){
+                            bansConfig.banIP(address, ban);
+
+                            Bukkit.broadcast(plugin.broadcastMessage(address, ban));
+                        }
+
+                        p.kick(plugin.kickMessage(ban, true), PlayerKickEvent.Cause.BANNED);
                     }
                 }
                 bansConfig.saveConfig();
